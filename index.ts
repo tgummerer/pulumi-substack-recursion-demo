@@ -1,5 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
+import * as command from "@pulumi/command";
 
 const config = new pulumi.Config();
 let one = config.getNumber("numberOne");
@@ -14,8 +15,11 @@ if (one === undefined || two === undefined) {
   two = temp + two;
 }
 
-let output1: pulumi.Output<any>;
-let output2: pulumi.Output<any>;
+let output: pulumi.Output<any>;
+
+const ls = new command.local.Command('ls-command' + String(two), {
+    create: 'ls',
+});
 
 if (one < 10) {
   const inner = new pulumi.Program("s", {
@@ -24,14 +28,10 @@ if (one < 10) {
       numberOne: one,
       numberTwo: two,
     },
-  });
-  output1 = inner.outputs.numberOne;
-  output2 = inner.outputs.numberTwo;
-  let bucket = new aws.s3.Bucket("b" + String(one), {}, { dependsOn: [inner] });
+  }, { dependsOn: [ls] });
+    output = pulumi.output(inner.outputs.apply((x: any) => [two].concat(x.fibonacci)));
 } else {
-  output1 = pulumi.output(one);
-  output2 = pulumi.output(two);
+  output = pulumi.output([two]);
 }
 
-export const numberOne = output1;
-export const numberTwo = output2;
+export const fibonacci = output;

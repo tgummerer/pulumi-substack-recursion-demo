@@ -195,6 +195,13 @@
     read-package-tree "^5.2.1"
     resolve "^1.7.1"
 
+"@pulumi/command@^0.9.2":
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/@pulumi/command/-/command-0.9.2.tgz#68875b68637da91709fc537292bbaece648a9acb"
+  integrity sha512-9RaGDiy8jFCiaarj4EOrMW/fVCM/AgBigzwM6CKzlR49x8UFiRDmKrXfEVHb8r2P9IpC4IaAZf5VbNNAHwN/rA==
+  dependencies:
+    "@pulumi/pulumi" "^3.0.0"
+
 "@pulumi/pulumi@^3.0.0":
   version "3.92.0"
   resolved "https://registry.yarnpkg.com/@pulumi/pulumi/-/pulumi-3.92.0.tgz#91a55091c4077b7471d3d88d63f1bd7d9344693a"
