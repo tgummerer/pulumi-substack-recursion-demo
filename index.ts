@@ -24,7 +24,7 @@ const ls = new command.local.Command('ls-command' + String(two), {
 if (one < 10) {
   const inner = new pulumi.Program("s", {
     source: ".",
-    inputs: {
+    config: {
       numberOne: one,
       numberTwo: two,
     },
